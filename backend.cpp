@@ -2,37 +2,45 @@
 
 Backend::Backend() {
 
+    // Create a QTCP Server to listen to ACTI Trigger Requests
+    server = new QTcpServer(this);
+    connect(server, SIGNAL(newConnection()),
+            this, SLOT(triggerRequestReadyRead()));
+    if(!server->listen(QHostAddress::Any, 27150))
+    {
+        qDebug() << "Server could not start";
+    }
+    else
+    {
+        qDebug() << "Server started!";
+    }
 
-    // create a QUDP socket
+    // Create a QUDP socket to listen to vehicle telemetry data
     socket = new QUdpSocket(this);
-
     socket->bind(27151);
-
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    connect(socket, SIGNAL(readyRead()), this, SLOT(vehicleTelemReadyRead()));
 }
 
-QString Backend::doElse()
-{
-    QString str("arshad husain");
-    return str;
+void Backend::triggerRequestReadyRead() {
+    QTcpSocket *socket = server->nextPendingConnection();
+
+    QByteArray array;
+    qint32 x = 5550;
+    array.append((const char*)&x, sizeof(x));
+
+    socket->write(array);
+    socket->flush();
+
+    socket->waitForBytesWritten(3000);
+
+    socket->close();
+
+    qDebug() << "Connect/Disconnect Trigger Handled";
+
 }
 
-QString Backend::doSome()
-{
-    // that's to demonstrate signal connection
-
-    QString doElseRet = this->doElse();
-
-    QByteArray newDoElse = doElseRet.toUtf8();
-
-//    emit someThing(newDoElse);
-
-    // simply returns a string with some markup
-    return "<font color='green'>new <b>GREEN</b> thing</font>";
-}
-
-void Backend::readyRead() {
-    // when data comes in
+void Backend::vehicleTelemReadyRead() {
+    // when vehicle telemetry data comes in
     QByteArray buffer;
     buffer.resize(socket->pendingDatagramSize());
 
@@ -44,14 +52,14 @@ void Backend::readyRead() {
 
     acti_payload_t* acti_pay = reinterpret_cast<acti_payload_t*>(buffer.data());
 
-//    float f = acti_pay->RPM;
-//    QByteArray array(reinterpret_cast<const char*>(&f), sizeof(f));
+    QString rpm = QString::number(acti_pay->RPM);
+    QString speed = QString::number((int)acti_pay->SpeedKMH);
+    QString gear = QString::number(acti_pay->gear);
+    QString fuel = QString::number(acti_pay->fuel);
 
-    QString f = QString::number(acti_pay->RPM);
+    emit displayData(rpm, speed, gear, fuel);
 
-    emit someThing(f);
-
-    qDebug() << "Message from: " << acti_pay->RPM;
-    qDebug() << "Message port: " << senderPort;
-    qDebug() << "Message: " << buffer;
+    qDebug() << "Fuel Rate: " << acti_pay->RPM / acti_pay->maxRpm / 10;
+//    qDebug() << "Message port: " << senderPort;
+//    qDebug() << "Message: " << buffer;
 }

@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QUdpSocket>
+#include <QTcpSocket>
+#include <QTcpServer>
 
 #pragma pack(1)
 
@@ -152,18 +154,16 @@ class Backend : public QObject
 public:
     Backend();
 
-    QString doElse();
-
 signals:
-    void someThing(QString smthing);
+    void displayData(QString rpm, QString speed, QString gear, QString fuel);
 
 public slots:
-    // that's our backend method
-    QString doSome();
-    void readyRead();
+    void vehicleTelemReadyRead();
+    void triggerRequestReadyRead();
 
 private:
     QUdpSocket *socket;
+    QTcpServer *server;
 
 };
 

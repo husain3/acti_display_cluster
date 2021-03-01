@@ -5,7 +5,8 @@ CONFIG += c++11
 SOURCES += main.cpp \
     backend.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    images/images.qrc
 
 RC_ICONS = qt.ico
 

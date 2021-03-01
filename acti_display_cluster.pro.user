@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2021-02-23T20:47:46. -->
+<!-- Written by QtCreator 4.11.1, 2021-02-27T23:57:03. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -54,7 +54,10 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.PluginSettings</variable>
-  <valuemap type="QVariantMap"/>
+  <valuemap type="QVariantMap">
+   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey"/>
+   <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
+  </valuemap>
  </data>
  <data>
   <variable>ProjectExplorer.Project.Target.0</variable>
@@ -282,8 +285,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/arshadhusain/acti_display_cluster/acti_display_cluster.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/arshadhusain/acti_display_cluster/acti_display_cluster.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">acti_display_cluster2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/arshadhusain/Downloads/acti_display_cluster/acti_display_cluster.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/arshadhusain/Downloads/acti_display_cluster/acti_display_cluster.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
