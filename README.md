@@ -17,3 +17,6 @@ https://forum.qt.io/topic/43165/solved-use-the-struct-inside-a-class/2
 Used these to figure out how to pass struct to signal to the QML frontend:
 https://stackoverflow.com/questions/19397567/passing-structure-to-signal-in-qt
 https://stackoverflow.com/questions/45650277/best-way-to-access-a-cpp-structure-in-qml
+
+Used this to get TCP socket to work to be able to get triggers frokm ACTI
+https://www.bogotobogo.com/Qt/Qt5_QTcpServer_Client_Server.php
